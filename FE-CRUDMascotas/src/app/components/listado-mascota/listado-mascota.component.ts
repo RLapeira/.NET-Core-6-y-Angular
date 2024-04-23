@@ -10,7 +10,7 @@ const listMascotas: Mascota[] = [
   { nombre: 'Mike', edad: 5, raza: 'Golder', color: 'Dorado', peso: 44 },
   { nombre: 'Milton', edad: 6, raza: 'Golden', color: 'Dorado', peso: 37 },
   { nombre: 'Bartolo', edad: 3, raza: 'Dogo Argentino', color: 'Blanco', peso: 60 },
-  { nombre: 'Aquiles', edad: 5, raza: 'Ovejero Aleman', color: 'Negro', peso: 67 },
+  { nombre: 'Aquiles', edad: 5, raza: 'Pastor Alemán', color: 'Negro', peso: 67 },
   { nombre: 'Homero', edad: 1, raza: 'Labrador', color: 'Negro', peso: 44 },
   { nombre: 'Mark', edad: 1, raza: 'Callejero', color: 'Negro', peso: 25 }
 ];
