@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MascotaService } from 'src/app/services/mascota.service';
 
 const listMascotas: Mascota[] = [
   { nombre: 'Onza', edad: 15, raza: 'Labrador', color: 'Dorado', peso: 25 },
@@ -28,9 +29,10 @@ export class ListadoMascotaComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor(private _snackBar: MatSnackBar, private _mascotaService: MascotaService) { }
 
   ngOnInit(): void {
+    this.obtenerMascotas();
   }
 
   ngAfterViewInit() {
@@ -42,6 +44,12 @@ export class ListadoMascotaComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  obtenerMascotas(){
+    this._mascotaService.getMascotas().subscribe(data => {
+      console.log(data);
+    });
   }
 
   eliminarMascota() {
