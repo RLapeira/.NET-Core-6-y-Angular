@@ -37,10 +37,10 @@
 
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef>
-        <button class="add" mat-raised-button color="primary">Nuevo</button>
+        <button routerLink="/agregarMascotas" class="add" mat-raised-button color="primary">Nuevo</button>
       </th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon  matTooltip="Ver" class="search" fontIcon="search"></mat-icon>
+        <mat-icon  routerLink="/verMascota/" matTooltip="Ver" class="search" fontIcon="search"></mat-icon>
         <mat-icon  matTooltip="Editar" class="edit" fontIcon="edit"></mat-icon>
         <mat-icon  matTooltip="Eliminar" class="delete" fontIcon="delete"></mat-icon>
       </td>
