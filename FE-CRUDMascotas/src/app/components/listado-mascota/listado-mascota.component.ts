@@ -61,16 +61,21 @@ export class ListadoMascotaComponent implements OnInit, AfterViewInit {
   //   });
   // }
 
-  eliminarMascota() {
+  eliminarMascota(id: number) {
     this.loading = true;
 
-    setTimeout(() => {
+    this._mascotaService.deleteMascota(id).subscribe(() => {
+      this.mensajeExito();
       this.loading = false;
-      this._snackBar.open('La mascota fue eliminada con exito', '', {
-        duration: 4000,
-        horizontalPosition: 'center',
-        //verticalPosition: 'top'
-      });
-    }, 3000);
+      this.obtenerMascotas();
+    });
+  }
+
+  mensajeExito() {
+    this._snackBar.open('La mascota fue eliminada con exito', '', {
+      duration: 4000,
+      horizontalPosition: 'center',
+      //verticalPosition: 'top'
+    });
   }
 }
