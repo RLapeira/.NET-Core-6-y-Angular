@@ -50,7 +50,7 @@ namespace BE_CRUDMascotas.Controllers
             }
         }
 
-        [HttpDelete("{id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
