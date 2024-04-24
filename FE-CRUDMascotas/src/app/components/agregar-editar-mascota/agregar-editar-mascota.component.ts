@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Mascota } from '../../interfaces/mascota';
 import { MascotaService } from 'src/app/services/mascota.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-editar-mascota',
@@ -13,15 +15,16 @@ export class AgregarEditarMascotaComponent implements OnInit {
   form: FormGroup
 
   constructor(private fb: FormBuilder,
-    private _mascotaService: MascotaService
-  ) {
-    this.form = this.fb.group({
-      nombre: ['', Validators.required],
-      raza: ['', Validators.required],
-      color: ['', Validators.required],
-      edad: ['', Validators.required],
-      peso: ['', Validators.required]
-    })
+    private _mascotaService: MascotaService,
+    private _snackBar: MatSnackBar,
+    private router: Router) {
+      this.form = this.fb.group({
+        nombre: ['', Validators.required],
+        raza: ['', Validators.required],
+        color: ['', Validators.required],
+        edad: ['', Validators.required],
+        peso: ['', Validators.required]
+      })
   }
 
   ngOnInit(): void {
@@ -39,8 +42,17 @@ export class AgregarEditarMascotaComponent implements OnInit {
     }
 
     // Enviamos objeto al back-end:
-    this._mascotaService.addMascota(mascota).subscribe(data => {
-      console.log(data);
+    this._mascotaService.addMascota(mascota).subscribe(() => {
+      this.mensajeExito();
+      this.router.navigate(['/listaMascotas']);
     })
+  }
+
+  mensajeExito() {
+    this._snackBar.open('La mascota fue registrada con exito', '', {
+      duration: 4000,
+      horizontalPosition: 'center',
+      //verticalPosition: 'top'
+    });
   }
 }
