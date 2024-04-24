@@ -63,6 +63,8 @@ namespace BE_CRUDMascotas.Controllers
                 }
 
                 _context.Mascotas.Remove(mascota);
+                await _context.SaveChangesAsync();
+
                 return NoContent();
             }
             catch (Exception ex)
