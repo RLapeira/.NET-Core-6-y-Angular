@@ -67,7 +67,7 @@ export class ListadoMascotaComponent implements OnInit, AfterViewInit {
   // }
 
   confirmarEliminar(id: number){
-    const dialogRef = this.dialog.open(DialogComponent, { width: '250px'});
+    const dialogRef = this.dialog.open(DialogComponent, { width: '350px' });
     dialogRef.afterClosed().subscribe(result => {
       if(result == true){
         this.eliminarMascota(id);
