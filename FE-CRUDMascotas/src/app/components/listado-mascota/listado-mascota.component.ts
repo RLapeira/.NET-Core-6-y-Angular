@@ -5,6 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MascotaService } from 'src/app/services/mascota.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-listado-mascota',
@@ -19,7 +21,10 @@ export class ListadoMascotaComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _snackBar: MatSnackBar, private _mascotaService: MascotaService) { }
+  constructor(
+    private _snackBar: MatSnackBar,
+    private _mascotaService: MascotaService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.obtenerMascotas();
@@ -60,6 +65,15 @@ export class ListadoMascotaComponent implements OnInit, AfterViewInit {
   //     complete: () => console.info('complete')
   //   });
   // }
+
+  confirmarEliminar(id: number){
+    const dialogRef = this.dialog.open(DialogComponent, { width: '250px'});
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true){
+        this.eliminarMascota(id);
+      }
+    });
+  }
 
   eliminarMascota(id: number) {
     this.loading = true;
