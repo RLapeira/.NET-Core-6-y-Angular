@@ -5,8 +5,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MascotaService } from 'src/app/services/mascota.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-listado-mascota',
@@ -24,7 +25,9 @@ export class ListadoMascotaComponent implements OnInit, AfterViewInit {
   constructor(
     private _snackBar: MatSnackBar,
     private _mascotaService: MascotaService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.obtenerMascotas();
@@ -44,11 +47,19 @@ export class ListadoMascotaComponent implements OnInit, AfterViewInit {
   }
 
   obtenerMascotas(){
-    this.loading = true;
-    this._mascotaService.getMascotas().subscribe(data => {
-      this.loading = false;
-      this.dataSource.data = data;
-    });
+    if(this.route.snapshot.queryParamMap.get('Ultimo')){
+      this.loading = true;
+      this._mascotaService.getMascotas().subscribe(data => {
+        this.loading = false;
+        this.dataSource.data = data.reverse();
+      });
+    } else {
+      this.loading = true;
+      this._mascotaService.getMascotas().subscribe(data => {
+        this.loading = false;
+        this.dataSource.data = data;
+      });
+    }
   }
 
   // obtenerMascotas(){
