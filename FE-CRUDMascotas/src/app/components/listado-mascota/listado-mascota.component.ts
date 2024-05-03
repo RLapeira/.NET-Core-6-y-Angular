@@ -48,10 +48,13 @@ export class ListadoMascotaComponent implements OnInit, AfterViewInit {
 
   obtenerMascotas(){
     if(this.route.snapshot.queryParamMap.get('Ultimo')){
+    // console.log(this.route.snapshot.queryParamMap.get('identificador'));
+    // if(this.route.snapshot.queryParamMap.get('identificador')){
       this.loading = true;
       this._mascotaService.getMascotas().subscribe(data => {
         this.loading = false;
         this.dataSource.data = data.reverse();
+        // this.dataSource.data.unshift()
       });
     } else {
       this.loading = true;

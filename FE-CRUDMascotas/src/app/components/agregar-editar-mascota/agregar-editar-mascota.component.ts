@@ -78,8 +78,8 @@ export class AgregarEditarMascotaComponent implements OnInit {
     this._mascotaService.updateMascota(id, mascota).subscribe(() => {
       this.loading = false;
       this.mensajeExito('actualizada');
-      this.router.navigate(['/listaMascotas']);
-      // this.router.navigateByUrl(`/listaMascotas?id=${id}`);
+      // this.router.navigate(['/listaMascotas'], { queryParams: { identificador: id } });
+      this.router.navigateByUrl('/listaMascotas?Ultimo=true');
     })
   }
 
